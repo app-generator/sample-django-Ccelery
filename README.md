@@ -241,9 +241,10 @@ class CeleryTask(models.Model):
 1) .gitignore (get rid of local environ but create requirements.txt instead)
 2) same level as manage.py CREATE Procfile:
 In Procfile:
+````
 web: gunicorn basic.wsgi --log-file -
 worker_and_beat: REMAP_SIGTERM=SIGQUIT celery -A basic.celery worker --loglevel=info -B
-
+````
 3) pip install django psycopg2 dj-database-url gunicorn
 4) git init
 5) git add .
