@@ -252,6 +252,7 @@ worker_and_beat: REMAP_SIGTERM=SIGQUIT celery -A basic.celery worker --loglevel=
 8.1) heroku addons:create heroku-postgresql:hobby-dev
 8.2) install redis ~ heroku addons:create heroku-redis:hobby-dev
 9) in settings.py under database: (will override the settings to use postgresql database if "DATABASE_URL" database environment available.) 
+````python
 if 'DATABASE_URL' in os.environ:
 
     DATABASES = {
@@ -266,6 +267,7 @@ else:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
+````
 
 10) git add .
 11) git commit -m "change database"
