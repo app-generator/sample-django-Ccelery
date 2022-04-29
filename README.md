@@ -271,16 +271,20 @@ else:
         }
     }
 ````
-
 10) git add .
+
 11) git commit -m "change database"
 
 12) heroku config:set DISABLE_COLLECTSTATIC=1
 
 13.1) git push heroku master
+
 13.2) After pushing: SCALE:
+
 ~ heroku ps:scale web=1 worker=1
+
 OR if using schedule
+
 ~ heroku ps:scale web=1 worker=1 beat=1 (must be paid plan)
 
 14) heroku run python manage.py migrate
