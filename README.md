@@ -250,8 +250,10 @@ worker_and_beat: REMAP_SIGTERM=SIGQUIT celery -A basic.celery worker --loglevel=
 5) git add .
 6) git commit -m "First Init"
 7) heroku create
+
 8.1) heroku addons:create heroku-postgresql:hobby-dev
 8.2) install redis ~ heroku addons:create heroku-redis:hobby-dev
+
 9) in settings.py under database: (will override the settings to use postgresql database if "DATABASE_URL" database environment available.) 
 ````python
 if 'DATABASE_URL' in os.environ:
