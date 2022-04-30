@@ -26,19 +26,19 @@
 
     open Terminal
 
-	 - Clone repository
+- Clone repository
 	 
 ````
 $ git clone https://github.com/app-generator/sample-django-celery.git
 
 ````
-   - Test redis
-   
+- Test redis
+  ```` 
     redis-cli ping
 
     $ redis-cli ping
     PONG
-
+````
     Close Redis with control + c to quit
 	
 Locally After All:
