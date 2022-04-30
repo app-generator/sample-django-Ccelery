@@ -33,7 +33,8 @@ $ git clone https://github.com/app-generator/sample-django-celery.git
 
 ````
 - Test redis
-  ```` 
+
+```` 
     redis-cli ping
 
     $ redis-cli ping
@@ -52,7 +53,7 @@ Start celery: celery -A basic.celery worker -l info
 
 > **Install Modules** using a Virtual Environment
 
-```bash
+```
 $ virtualenv env
 $ source env/bin/activate
 $ pip3 install -r requirements.txt
@@ -60,7 +61,7 @@ $ pip3 install -r requirements.txt
 
 Or for **Windows-based Systems**
 
-```bash
+```
 $ virtualenv env
 $ .\env\Scripts\activate
 $
@@ -72,7 +73,7 @@ $ pip3 install -r requirements.txt
 
 >  **Migrate Database**
 
-```bash
+```
 $ python manage.py migrate
 $ python manage.py runserver
 ```
@@ -81,7 +82,7 @@ $ python manage.py runserver
 
 >  **Create Superuser**
 
-```bash
+```
 $ python manage.py createsuperuser
 ```
 
@@ -89,7 +90,7 @@ $ python manage.py createsuperuser
 
 >  **Start the APP**
 
-```bash
+```
 $ python manage.py runserver
 ```
 
