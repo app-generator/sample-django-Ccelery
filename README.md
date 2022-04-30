@@ -41,15 +41,6 @@ $ git clone https://github.com/app-generator/sample-django-celery.git
     PONG
 ````
     Close Redis with control + c to quit
-	
-Locally After All:
-[
-Start Redis server
-````
-Start celery: celery -A basic.celery worker -l info
-````
-]
-
 
 > **Install Modules** using a Virtual Environment
 
@@ -89,6 +80,13 @@ $ python manage.py createsuperuser
 <br />
 
 >  **Start the APP**
+	
+Locally After All:
+
+Start Redis server
+````
+Start celery: celery -A basic.celery worker -l info
+````
 
 ```
 $ python manage.py runserver
