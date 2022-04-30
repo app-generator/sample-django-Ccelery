@@ -22,10 +22,18 @@
                             
    ***Windows*** [https://github.com/tporadowski/redis/releases]
 
-2. Open & Test Redis:
+2. Clone repository & Test Redis:
 
     open Terminal
 
+	 - Clone repository
+	 
+````
+$ git clone https://github.com/app-generator/sample-django-celery.git
+
+````
+   - Test redis
+   
     redis-cli ping
 
     $ redis-cli ping
@@ -36,12 +44,64 @@
 Locally After All:
 [
 Start Redis server
+````
 Start celery: celery -A basic.celery worker -l info
-Start simple beat: celery -A basic.celery  beat -l info
-Start database beat: celery -A basic.celery  beat -S django
+````
 ]
 
-3. Install Celery + Redis in your virtualenv.
+
+> **Install Modules** using a Virtual Environment
+
+```bash
+$ virtualenv env
+$ source env/bin/activate
+$ pip3 install -r requirements.txt
+```
+
+Or for **Windows-based Systems**
+
+```bash
+$ virtualenv env
+$ .\env\Scripts\activate
+$
+$ # Install modules - SQLite Database
+$ pip3 install -r requirements.txt
+```
+
+<br />
+
+>  **Migrate Database**
+
+```bash
+$ python manage.py migrate
+$ python manage.py runserver
+```
+
+<br />
+
+>  **Create Superuser**
+
+```bash
+$ python manage.py createsuperuser
+```
+
+<br />
+
+>  **Start the APP**
+
+```bash
+$ python manage.py runserver
+```
+
+visit on browser to load site
+```
+http://127.0.0.1:8000
+```
+<br />
+
+> Developers Notes
+
+1. Install Celery + Redis in your virtualenv.
 
 pip install celery
 
@@ -53,7 +113,7 @@ pip install django-celery-results
 
 pip freeze > requirements.txt
 
-4. Update Django settings.py:
+2. Update Django settings.py:
 
 ````
 INSTALLED_APPS = [
@@ -101,7 +161,7 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
 ````
 
-5. Create celery.py to setup Celery app: Navigate to project config module (where settings and urls modules are) and create a celery.py file with the contents:
+3. Create celery.py to setup Celery app: Navigate to project config module (where settings and urls modules are) and create a celery.py file with the contents:
 
 ````python
 from __future__ import absolute_import, unicode_literals
@@ -126,7 +186,7 @@ app.conf.beat_schedule = {
 app.autodiscover_tasks()
 ````
 
-6. Create tasks.py in your Django main app ("django_celery_tracker") :
+4. Create tasks.py in your Django main app ("django_celery_tracker") :
 
 ````python
 from __future__ import absolute_import, unicode_literals
@@ -148,7 +208,7 @@ def text_task(self, text):
         logger.error(e)
 ````
 
-7. Create views.py to invoke task when text is submited from form.
+5. Create views.py to invoke task when text is submited from form.
 ````python
 class TextFormView(FormView):
     form_class = TextFormModelForm
@@ -177,7 +237,7 @@ We use .delay() to tell Celery to add the task to the queue.
 We got back a successful AsyncResult — that task is now waiting in Redis for a worker to pick it up!
 text_task.delay() (should see `<AsyncResult: c6ef74b9-4c03-402a-b1db-9e2adbf52f75>`)
 
-8. Create django_celery_tracker/signals.py.  We use celery signals to log tasks status and activities. 
+6. Create django_celery_tracker/signals.py.  We use celery signals to log tasks status and activities. 
 ````python
 from celery.signals import before_task_publish, task_prerun, task_postrun
 
@@ -216,7 +276,7 @@ def task_postrun_handler(sender=None, task_id=None, state=None, **kwargs):
     t.save(update_fields=['completed', 'post_state'])
 ````
 
-9. In models.py, give the following
+7. In models.py, give the following
 
 ````python		
 class CeleryTask(models.Model):
@@ -234,9 +294,7 @@ class CeleryTask(models.Model):
         return "id=%s, name=%s" % (self.task_id, self.task_name)
 ````
 
-10. Run migrations: python manage.py makemigrations and python manage.py migrate
-		
-
+8. 
 ###################### DEPLOY ON HEROKU #####################
 1) .gitignore (get rid of local environ but create requirements.txt instead)
 2) same level as manage.py CREATE Procfile:
