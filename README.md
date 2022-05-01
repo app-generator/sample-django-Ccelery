@@ -110,7 +110,6 @@ pip install django-celery-beat
 
 pip install django-celery-results
 
-pip freeze > requirements.txt
 
 2. Update Django settings.py:
 
