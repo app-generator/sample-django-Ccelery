@@ -196,11 +196,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
-# Google Recapcha 
-
-GOOGLE_RECAPTCHA_SITE_KEY = os.getenv('GOOGLE_RECAPTCHA_SITE_KEY')
-GOOGLE_RECAPTCHA_SECRET_KEY = os.getenv('GOOGLE_RECAPTCHA_SECRET_KEY')
-
 
 # Rest Framework Settings
 
@@ -220,19 +215,19 @@ CORS_ALLOW_CREDENTIALS: True
 
 # Celery
 
-REDIS_URL = os.environ.get('REDIS_URL', 'localhost')
+REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379')
 
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": os.environ.get('REDIS_URL', 'localhost'),
+        "LOCATION": os.environ.get('REDIS_URL', 'redis://localhost:6379'),
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     }
 }
 
-CELERY_BROKER_URL = os.environ.get('REDIS_URL', 'localhost')
+CELERY_BROKER_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379')
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 
